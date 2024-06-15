@@ -1,0 +1,16 @@
+{
+  "name": "infinity-scroll-react",
+  "version": "1.0.0",
+  "main": "dist/infinity-scroll-react.umd.js",
+  "module": "dist/infinity-scroll-react.es.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
