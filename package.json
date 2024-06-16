@@ -1,14 +1,18 @@
 {
   "name": "infinity-scroll-react",
-  "author": {"email": "arnab95gupta@gmail.com","name": "Arnab Gupta"},
-  "license":"MIT",
+  "author": {
+    "email": "arnab95gupta@gmail.com",
+    "name": "Arnab Gupta",
+    "url": "https://github.com/r3Vibe"
+  },
+  "license": "MIT",
   "homepage": "https://github.com/r3Vibe/infinity-scroll-react",
   "repository": {
     "type": "git",
     "url": "https://github.com/r3Vibe/infinity-scroll-react"
   },
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -20,8 +24,12 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["/dist"],
-  "publishConfig": {"access": "public"},
+  "files": [
+    "/dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -45,5 +53,12 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.1"
-  }
+  },
+  "contributors": [
+    {
+      "email": "arnab95gupta@gmail.com",
+      "name": "Arnab Gupta",
+      "url": "https://github.com/r3Vibe"
+    }
+  ]
 }
