@@ -10,7 +10,7 @@ interface IProps {
 }
 
 /**
- * Scroller component is a infinite scroll component. It will keep loading data as the user scrolls. 
+ * Scroller component is a infinite scroll component. It will keep loading data as the user scrolls.
  * Uses Intersection Observer API to detect when the user has scrolled to the end.
  * @author Arnab Gupta (<arnab95gupta@gmail.com>)
  * @param {Object} props - An object containing the following properties:
@@ -22,14 +22,14 @@ interface IProps {
  * @param {boolean} props.hasMore - A boolean indicating if there are more items to load.
  * @returns {ReactNode} - A React component.
  */
-export default function Scroller({
+export const Scroller = ({
   data,
   RenderFn,
   loadMore,
   loading,
   hasMore,
   LoaderFn = () => <div className="loader">Loading...</div>,
-}: IProps): ReactNode {
+}: IProps): ReactNode => {
   const [alldata, setAlldata] = useState<any>([]);
   const observer = useRef<IntersectionObserver | null>(null);
   const lastItemRef = useCallback(
@@ -72,4 +72,4 @@ export default function Scroller({
       {loading && <LoaderFn />}
     </>
   );
-}
+};

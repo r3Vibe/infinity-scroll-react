@@ -1,16 +1,49 @@
 {
   "name": "infinity-scroll-react",
-  "version": "1.0.0",
-  "main": "dist/infinity-scroll-react.umd.js",
-  "module": "dist/infinity-scroll-react.es.js",
-  "files": [
-    "dist"
-  ],
+  "author": {"email": "arnab95gupta@gmail.com","name": "Arnab Gupta"},
+  "license":"MIT",
+  "homepage": "https://github.com/r3Vibe/infinity-scroll-react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r3Vibe/infinity-scroll-react"
+  },
+  "private": false,
+  "version": "1.0.2",
+  "type": "module",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["/dist"],
+  "publishConfig": {"access": "public"},
   "scripts": {
-    "build": "vite build"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.1"
   }
 }
