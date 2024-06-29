@@ -12,7 +12,7 @@
     "url": "git+https://github.com/r3Vibe/infinity-scroll-react.git"
   },
   "private": false,
-  "version": "1.0.4",
+  "version": "1.0.6",
   "type": "module",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
