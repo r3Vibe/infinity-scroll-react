@@ -1,8 +1,9 @@
-import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useCallback, useEffect, useRef } from "react";
+import loaderSvg from "./loader.svg";
 
 interface IProps {
-  data: { [key: string]: any }[];
-  RenderFn: (item: any) => ReactNode;
+  lastitemIndex: number;
+  children: ReactNode;
   LoaderFn?: () => ReactNode;
   loadMore: () => void;
   loading: boolean;
@@ -10,30 +11,43 @@ interface IProps {
 }
 
 /**
- * Scroller component is a infinite scroll component. It will keep loading data as the user scrolls.
+ * Scroller component is an infinite scroll component. It will keep loading data as the user scrolls.
  * Uses Intersection Observer API to detect when the user has scrolled to the end.
- * @author Arnab Gupta (<arnab95gupta@gmail.com>)
+ * @author
  * @param {Object} props - An object containing the following properties:
- * @param {Array} props.data - An array of items to display.
- * @param {Function} props.RenderFn - A react function that will render a single item from the data array.
+ * @param {Number} props.lastitemIndex - Last item index of the data array.
+ * @param {Function} props.children - A react function that will render a single item from the data array.
  * @param {Function} [props.LoaderFn] - A react function that renders a loading message when more items are being loaded.
  * @param {Function} props.loadMore - A function that should add 1 to the current page.
  * @param {boolean} props.loading - A boolean indicating if items are currently being loaded.
  * @param {boolean} props.hasMore - A boolean indicating if there are more items to load.
- * @returns {ReactNode} - A React component.
+ * @returns {ReactElement} - A React component.
  */
 export const Scroller = ({
-  data,
-  RenderFn,
+  lastitemIndex,
+  children,
   loadMore,
   loading,
   hasMore,
-  LoaderFn = () => <div className="loader">Loading...</div>,
-}: IProps): ReactNode => {
-  const [alldata, setAlldata] = useState<any>([]);
+  LoaderFn = () => (
+    <div
+      style={{
+        textAlign: "center",
+        width: "100%",
+        padding: "10px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <img src={loaderSvg} alt="loader" />
+    </div>
+  ),
+}: IProps): React.ReactElement => {
   const observer = useRef<IntersectionObserver | null>(null);
+
   const lastItemRef = useCallback(
-    (node: any) => {
+    (node: HTMLElement | null) => {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
@@ -47,29 +61,22 @@ export const Scroller = ({
   );
 
   useEffect(() => {
-    if (data) {
-      setAlldata((predata: any) => [...predata, ...data]);
-    }
-  }, [data]);
+    // Ensure to clean up observer on unmount
+    return () => observer.current?.disconnect();
+  }, []);
 
   return (
     <>
-      {alldata?.map((item: any, index: number) => {
-        if (index === alldata?.length - 1) {
-          return (
-            <div key={item?.id} ref={lastItemRef}>
-              <RenderFn item={item} />
-            </div>
-          );
+      {React.Children.map(children, (child, index) => {
+        if (index === lastitemIndex) {
+          return <div ref={lastItemRef}>{child}</div>;
         } else {
-          return (
-            <div key={item?.id}>
-              <RenderFn item={item} />
-            </div>
-          );
+          return <div>{child}</div>;
         }
       })}
       {loading && <LoaderFn />}
     </>
   );
 };
+
+export default Scroller;
